@@ -11,28 +11,41 @@
         <body>
           <div class="contain pt-10">
             <!-- Input group -->
+            <form:form action="search" method="get">
+                          <div class="d-flex ">
+                            <div class="input-group w-auto">
+                              <input name="searchInput" type="text" class="form-control" placeholder="Search input" aria-label="Search input"/>
+                              <button class="btn btn-primary" type="submit"  data-mdb-ripple-color="dark">Search
+                              </button>
+                            </div>
+                          </div>
+                        </form:form>
             <div class="mt-10">
               <p>
                 <c:out value="${msg}" />
               </p>
-              <c:if test="${empty productList}">
+              <c:if test="${empty ordersList}">
                 <p>No data</p>
               </c:if>
-              <c:if test="${not empty productList}">
+              <c:if test="${not empty ordersList}">
                 <table class="table">
                   <thead class="thead-dark">
                     <tr>
-                      <th scope="col">Product Name</th>
-                      <th scope="col">Unit Price</th>
+                      <th scope="col">OrderId</th>
+                      <th scope="col">OrderDate</th>
+                      <th scope="col">Customer Name</th>
+                      <th scope="col">View Details</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <c:forEach var="product" items="${productList}" varStatus="e">
+                    <c:forEach var="order" items="${ordersList}" varStatus="e">
                       <tr>
-                        <td>${product.productName}</td>
-                        <td>${product.unitPrice}</td>
+                        <td>${order.orderId}</td>
+
+                        <td>${order.orderDate}</td>
+                        <td>${order.customerName}</td>
                         <td><button class="btn btn-sm btn-primary"
-                            onclick="location.href='add/${product.productId}'">Add To Cart</button></td>
+                            onclick="location.href='viewDetail/${order.orderId}'">View Details</button></td>
                       </tr>
                     </c:forEach>
                   </tbody>
